@@ -34,7 +34,7 @@
 
 ---
 
-## Примеры использования (вне `src/`, например `playground.py`)
+## Примеры использования
 
 ```python
 from src.rectangle import Rectangle
