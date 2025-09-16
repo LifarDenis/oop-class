@@ -1,25 +1,24 @@
-from __future__ import annotations
-from abc import ABC, abstractmethod
+class Figure:  # базовый класс для всех фигур
+    def __init__(self, name):
+        self.name = name  # сохраняем имя фигуры (например, "Rectangle", "Circle")
 
-class Figure(ABC):
-    @abstractmethod
-    def get_area(self) -> float:
-        ...
+    def area(self):
+        # базовый метод площади, здесь он пустой
+        # наследники ОБЯЗАНЫ его переопределить
+        raise NotImplementedError("Метод area() должен быть реализован в наследнике")
 
-    @abstractmethod
-    def get_perimeter(self) -> float:
-        ...
+    def perimeter(self):
+        # базовый метод периметра, тоже только шаблон
+        raise NotImplementedError("Метод perimeter() должен быть реализован в наследнике")
 
-    def add_area(self, other: "Figure") -> float:
-        if not isinstance(other, Figure):
-            raise ValueError("Should be a Figure")
-        return self.get_area() + other.get_area()
+    def add_area(self, figure):
+        # проверяем, что аргумент действительно является фигурой
+        # У ТЕБЯ ошибка: сейчас написано if isinstance → raise
+        # а надо наоборот: если НЕ фигура — ошибка
+        if not isinstance(figure, Figure):
+            raise ValueError("Аргумент должен быть экземпляром класса Figure")
+        # возвращаем сумму площадей двух фигур
+        return self.area() + figure.area()
 
-    # Удобные свойства (чтобы работали примеры из задания: square.area)
-    @property
-    def area(self) -> float:
-        return self.get_area()
 
-    @property
-    def perimeter(self) -> float:
-        return self.get_perimeter()
+

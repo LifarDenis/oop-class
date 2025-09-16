@@ -1,13 +1,16 @@
-from src.rectangle import Rectangle
+#Квадрат
+from src.rectangle import Rectangle  # импортируем класс Rectangle, от которого будем наследовать
 
+# создаём класс Square (Квадрат), он наследуется от Rectangle
 class Square(Rectangle):
-    def __init__(self, side: float):
-        if side <= 0:
-            raise ValueError("Square side must be positive")
-        super().__init__(side, side)
+    def __init__(self, side: int):  # в конструкторе квадрату достаточно одной стороны
+        if side <= 0:  # проверка, что сторона положительная
+            raise ValueError(f'Сторона квадрата не может быть отрицательной {side}')
+        super().__init__(side, side)   # вызываем конструктор Rectangle, передаём две одинаковые стороны
+        self.name = "Square"  # переопределяем имя фигуры
 
-s = Square(4)
-print("\nSQUARE")
-print("side:", s.side_a)     # унаследовано от Rectangle
-print("area:", s.get_area())
-print("perimeter:", s.get_perimeter())
+# --- пример использования ---
+
+s = Square(5)           # создаём объект квадрата со стороной 5
+print(s.perimeter)    # вызываем метод из Rectangle -> 2 * (5 + 5) = 20
+print(s.area)         # вызываем метод из Rectangle -> 5 * 5 = 25

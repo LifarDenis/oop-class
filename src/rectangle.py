@@ -1,21 +1,33 @@
-from src.figure import Figure
+#Прямоугольник
 
-class Rectangle(Figure):
-    def __init__(self, side_a: float, side_b: float):
-        if side_a <= 0 or side_b <= 0:
-            raise ValueError("Rectangle sides must be positive")
-        self.side_a = side_a
-        self.side_b = side_b
+from src.figure import Figure                                    # импортируем базовый класс Figure
+class Rectangle(Figure):                                         # объявляем класс Прямоугольник и наследуемся от Figure
 
-    def get_area(self) -> float:
-        return self.side_a * self.side_b
+    def __init__(self, side_a: int, side_b: int):                # конструктор: сюда приходят стороны a и b
+        if side_a <= 0 or side_b <= 0:                           # простая валидация входных данных
+            raise ValueError(f'Не может быть отрицательным {side_a},{side_b}') # если некорректно — бросаем ошибку
 
-    def get_perimeter(self) -> float:
-        return 2 * (self.side_a + self.side_b)
+        super().__init__("Rectangle") # вызываем конструктор родителя и задаём имя фигуры
+        self.side_a = side_a               # сохраняем сторону a в атрибут объекта
+        self.side_b = side_b               # сохраняем сторону b в атрибут объекта
+
+    @property                              # декоратор для свойства
+    def area(self):                        # метод для вычисления площади
+        return self.side_a * self.side_b   # формула площади прямоугольника: a * b
+
+    @property                              # декоратор для свойства
+    def perimeter(self):                   # метод для вычисления периметра
+        return 2 * (self.side_a + self.side_b) # формула периметра: 2 * (a + b)
 
 
-r = Rectangle(3, 5)
-print("\nRECTANGLE")
-print("sides:", r.side_a, r.side_b)
-print("area:", r.get_area())
-print("perimeter:", r.get_perimeter())
+# --- пример использования (ниже уже не описание класса, а «скрипт») ---
+
+r = Rectangle(3, 4) # создаём объект прямоугольника со сторонами 3 и 4
+print(r.name)        # печатаем имя фигуры (поле пришло из Figure) -> "Rectangle"
+print(r.area)     # вызываем метод площади -> 12
+print(r.perimeter) # вызываем метод периметра -> 14
+
+
+
+
+
